@@ -1,0 +1,14 @@
+[] sterowanie diodami cytrona
+[] ustanowienie komunikacji USART
+[] Prosty program od strony C++ jako interfejs
+
+
+
+"""
+	struct command{
+		int times; 8 ilosc powtorzen
+		int id; 4 // id komendy
+	};
+
+	PC => [command_START]  [command_X]  [...]  [command_END]
+"""
