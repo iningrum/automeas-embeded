@@ -1,7 +1,10 @@
-[] sterowanie diodami cytrona
+[X] sterowanie diodami cytrona
+[X] brzeczyk ale brak tonu
 [] ustanowienie komunikacji USART
 [] Prosty program od strony C++ jako interfejs
 
+
+[] ogarniecie tonu przy przeczyku
 
 
 """

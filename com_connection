@@ -1,0 +1,5 @@
+0. cmd as admin > usbipd wsl list
+1. ALLOW FOR PORT 3240
+2. cmd as admin > usbipd wsl attach --busid 1-6
+3. FIND TTY_USB_N in /dev
+4. profit

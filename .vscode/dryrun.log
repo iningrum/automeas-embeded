@@ -1,7 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/home/iningrum/projects/automeas-embeded'
-avr-gcc -Os -DF_APU=16000000UL -mmcu=atmega328p  -c -o comm.o comm.c
-avr-gcc -mmcu=atmega328p  -o  comm comm.o
-avr-objcopy -O ihex -R .eeprom comm comm.hex
+make: Nothing to be done for 'all'.
 make: Leaving directory '/home/iningrum/projects/automeas-embeded'
  

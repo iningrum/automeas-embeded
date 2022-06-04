@@ -1,11 +1,30 @@
 // not mine code
 // it's a frankenstein
 // code hasnt been tested nor deployed
+#define F_CPU 16000000UL
 #include <avr/io.h> 
-#include <avr/interrupt.h>  
+#include <util/delay.h>
+#include <avr/interrupt.h>
+#include "music_notes.h"  
 //#define BAUD_RATE_2304 2
 int main(){
-    PORTB |= 
+    DDRB |= (1<<DDB1) | (1<<DDB2) | (1<<DDB3);
+    while (1){
+        OCR0A = NOTE_G2;
+        PORTB |= (1<<PORTB1);
+        PORTB |= (1<<PB0);
+        _delay_ms(500);
+        PORTB &= ~(1<<PB0);
+        PORTB |= (1<<PORTB2);
+        OCR0A = NOTE_G5;
+        _delay_ms(500);
+        PORTB &= ~(1<<PORTB1);
+        PORTB |= (1<<PB0);
+        _delay_ms(500);
+        PORTB &= ~(1<<PB0);
+        PORTB &= ~(1<<PORTB2);
+        _delay_ms(500);
+    } 
 }
 /*void set_transmission_mode(int mode){
     switch (mode){
