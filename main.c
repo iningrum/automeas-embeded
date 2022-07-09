@@ -40,13 +40,14 @@ int main(void) {
   UBRR0L = BRC;
   UCSR0B = (1 << RXEN0) | (1 << RXCIE0);
   UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
-  DDRB = (1 << PORTB0);
+  DDRB = (1 << PORTB1);
+  sei();
   while (1) {
     char c = getChr();
     if (c == '1') {
-      sbi(PORTB, PORTB0);
+      sbi(PORTB, PORTB1);
     } else if (c == '0') {
-      cbi(PORTB, PORTB0);
+      cbi(PORTB, PORTB1);
     }
   }
 }
