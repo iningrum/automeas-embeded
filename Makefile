@@ -11,6 +11,8 @@ comm: comm.o
 	avr-gcc $(LDFLAGS) -o  $@ $^
 comm.o: main.c
 	avr-gcc $(CFLAGS) -c -o $@ $<
+
+
 deploy: comm.hex
 	avrdude -F -V -c arduino  -p atmega328p -P $(PORT) -b 115200 -U flash:w:comm.hex
 

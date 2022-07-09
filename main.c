@@ -6,35 +6,10 @@
         A simple program that establishes comms  between
         PC and MCU.
 */
-#include <avr/interrupt.h>
-#include <avr/io.h>
-#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
-#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
-#define F_CPU 16000000
-#define BAUD 9600
-#define BRC ((F_CPU / 16 / BAUD) - 1)
-#define RX_BUFFER_SIZE 128
-char rxBuffer[RX_BUFFER_SIZE];
-uint8_t rxReadPos = 0;
-uint8_t rxWritePos = 0;
 
-char getChr(void) {
-  char ret = '\0';
-  if (rxReadPos != rxWritePos) {
-    ret = rxBuffer[rxReadPos++];
-    if (rxReadPos >= RX_BUFFER_SIZE) {
-      rxReadPos = 0;
-    }
-  }
-  return ret;
-}
-char peekChr(void) {
-  char ret = '\0';
-  if (rxReadPos != rxWritePos) {
-    ret = rxBuffer[rxReadPos];
-  }
-  return ret;
-}
+#include "includes_definitions.h"
+#include "rx.h"
+
 int main(void) {
   UBRR0H = (BRC >> 8);
   UBRR0L = BRC;
