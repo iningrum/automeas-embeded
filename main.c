@@ -1,84 +1,58 @@
+// automeas-embeded-0-0-0 by Kczyz
+/*
+    Project :
+        AUTOMEAS
+    Description:
+        A simple program that establishes comms  between
+        PC and MCU.
+*/
+#include <avr/interrupt.h>
+#include <avr/io.h>
+#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+#define F_CPU 16000000
 #define BAUD 9600
-#include "char_comm.c"
-#include <util/setbaud.h>
-char usart_getchar(void) {
-// Wait for incoming data
-while ( !(UCSR0A & (_BV(RXC0))) );
-// Return the data
-return UDR0;
-}
-int loop = 1;
-char RECEIVED_DATA[200];
-int RDATA_size = 0;
-void set_transmission_mode(int mode){
-    switch (mode){
-        case 0: // transmitter
-            UCSR0B = (1<<TXEN0);
-        break;
-        default: // receiver
-            UCSR0B = (1<<RXEN0);
-    }
-}
-void usart_init(){
+#define BRC ((F_CPU / 16 / BAUD) - 1)
+#define RX_BUFFER_SIZE 128
+char rxBuffer[RX_BUFFER_SIZE];
+uint8_t rxReadPos = 0;
+uint8_t rxWritePos = 0;
 
-    UBRR0H = UBRRH_VALUE;
-    UBRR0L = UBRRL_VALUE;
-    UCSR0B = (1<<TXEN0) | (1<<RXEN0);
-    UCSR0C = _BV(UCSZ01) | _BV(UCSZ00); // 8data 1 stop bit?
+char getChr(void) {
+  char ret = '\0';
+  if (rxReadPos != rxWritePos) {
+    ret = rxBuffer[rxReadPos++];
+    if (rxReadPos >= RX_BUFFER_SIZE) {
+      rxReadPos = 0;
+    }
+  }
+  return ret;
 }
-int main(void) 
-{
-    pin(DIR,0);
-    pin(STEP,0);
-    pin(MS1,0);
-    pin(MS2,0);
-    pin(MS3,1); 
-    usart_init(); 
-    sei();
-    /*for(int i =0; i<150;i++){
-        RECEIVED_DATA[i] = 's';
-        RDATA_size++;
+char peekChr(void) {
+  char ret = '\0';
+  if (rxReadPos != rxWritePos) {
+    ret = rxBuffer[rxReadPos];
+  }
+  return ret;
+}
+int main(void) {
+  UBRR0H = (BRC >> 8);
+  UBRR0L = BRC;
+  UCSR0B = (1 << RXEN0) | (1 << RXCIE0);
+  UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+  DDRB = (1 << PORTB0);
+  while (1) {
+    char c = getChr();
+    if (c == '1') {
+      sbi(PORTB, PORTB0);
+    } else if (c == '0') {
+      cbi(PORTB, PORTB0);
     }
-    char* values = (char*) malloc(sizeof(char)*RDATA_size);
-        for(int i=0; i<RDATA_size; i++){
-            values[i] = RECEIVED_DATA[i];
-        }
-		RDATA_size = 0;
-        exec_commands(values);
-
-    while(1);*/
-    while(1){
-        char c = usart_getchar();
-        if (c){
-            for(int i=0; i<200;i++){
-                pulse_pin(STEP);
-            }
-        }
-        if(c=='\r'){
-            break;
-        }
-        RECEIVED_DATA[RDATA_size] = c;
-        RDATA_size++;
-    }
-    char* values = (char*) malloc(sizeof(char)*RDATA_size);
-        for(int i=0; i<RDATA_size; i++){
-            values[i] = RECEIVED_DATA[i];
-        }
-		RDATA_size = 0;
-        exec_commands(values);
-} 
- 
-ISR(USART_RX_vect)
-{
-	/*RECEIVED_DATA[RDATA_size]=UDR0;
-	RDATA_size++;
-    if(RECEIVED_DATA[RDATA_size]=='\r')
-	{
-		char* values = (char*) malloc(sizeof(char)*RDATA_size);
-        for(int i=0; i<RDATA_size; i++){
-            values[i] = RECEIVED_DATA[i];
-        }
-		RDATA_size = 0;
-        exec_commands(values);
-	}*/
+  }
+}
+ISR(USART_RX_vect) {
+  rxBuffer[rxWritePos++] = UDR0;
+  if (rxWritePos >= RX_BUFFER_SIZE) {
+    rxWritePos = 0;
+  }
 }
