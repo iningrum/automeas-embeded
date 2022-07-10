@@ -7,6 +7,8 @@
 #include "includes_definitions.h"
 // variables
 char rxBuffer[RX_BUFFER_SIZE];
+char echoBuffer[2] = {'\0', '\0'};
+char *cmd = &echoBuffer[0];
 uint8_t rxReadPos = 0;
 uint8_t rxWritePos = 0;
 // functions

@@ -8,8 +8,8 @@
 */
 
 #include "includes_definitions.h"
-#include "jtx.h"
 #include "rx.h"
+#include "tx.h"
 int main(void) {
   UBRR0H = (BRC >> 8);
   UBRR0L = BRC;
@@ -25,7 +25,8 @@ int main(void) {
   while (1) {
     char c = getChr();
     if (c != '\0') {
-      serialWrite("1\n\r");
+      *cmd = c;
+      serialWrite(echoBuffer);
     }
     if (c == '1') {
       sbi(PORTB, PORTB1);
