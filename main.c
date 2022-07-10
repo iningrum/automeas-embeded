@@ -10,7 +10,30 @@
 #include "includes_definitions.h"
 #include "rx.h"
 #include "tx.h"
+typedef struct {
+  char cmd;
+  uint8_t val;
+} Datum;
+Datum getDatum(void) {
+  Datum result;
+  result.cmd = getChr();
+  *echoVal = result.cmd;
+  serialWrite(echoBuffer);
+  { // get val
+    char dataBuffer[3];
+    for (uint8_t i = 0; i < 3; i++) {
+      dataBuffer[i] = getChr();
+      *echoVal = dataBuffer[i];
+      serialWrite(echoBuffer);
+    }
+    serialWrite("\n\r");
+    result.val = tc28b(dataBuffer);
+    getChr();
+  }
+  return result;
+}
 int main(void) {
+  Datum T;
   UBRR0H = (BRC >> 8);
   UBRR0L = BRC;
   UCSR0B = (1 << TXEN0) | (1 << TXCIE0) | (1 << RXEN0) | (1 << RXCIE0);
@@ -25,23 +48,11 @@ int main(void) {
   while (1) {
     char c = lpeekChr();
     if (c == 'x') {
-      while (1)
-        sbi(PORTB, PORTB1);
-      char cmd = getChr();
-      *echoVal = cmd;
-      serialWrite(echoBuffer);
-      uint8_t val;
-      { // get val
-        char dataBuffer[3];
-        for (uint8_t i = 0; i < 3; i++) {
-          dataBuffer[i] = getChr();
-        }
-        val = tc28b(dataBuffer);
-      }
-      if (val == 125 && cmd == 'c')
-        sbi(PORTB, PORTB1);
+      T = getDatum();
+      if (T.val == 125 && T.cmd == 'c')
+        sbi(PORTB, PORTB2);
       else
-        cbi(PORTB, PORTB1);
+        cbi(PORTB, PORTB2);
     }
   }
 }
