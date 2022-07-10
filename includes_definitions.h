@@ -16,4 +16,7 @@
 #define BRC ((F_CPU / 16 / BAUD) - 1)               // ??
 #define RX_BUFFER_SIZE 128                          // receive buffer
 #define TX_BUFFER_SIZE 128
+// greeter definitions
+#define GREETER_LINE1 "automeas-embeded-0.0.0 by Kczyz\n\r"
+#define GREETER_LINE2 "-------------------------------\n\r"
 #endif

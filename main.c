@@ -8,8 +8,8 @@
 */
 
 #include "includes_definitions.h"
+#include "jtx.h"
 #include "rx.h"
-#include "tx.h"
 int main(void) {
   UBRR0H = (BRC >> 8);
   UBRR0L = BRC;
@@ -17,12 +17,16 @@ int main(void) {
   UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
   DDRB = (1 << PORTB1);
   sei();
-  serialWrite("Hello\n\r");
-  serialWrite("World\n\r");
-  _delay_ms(1500);
-  serialWrite("Goodbye\n\r");
+  serialWrite(GREETER_LINE2);
+  serialWrite(GREETER_LINE1);
+  serialWrite(GREETER_LINE2);
+  while (!(UCSR0A & (1 << UDRE0)))
+    ;
   while (1) {
     char c = getChr();
+    if (c != '\0') {
+      serialWrite("1\n\r");
+    }
     if (c == '1') {
       sbi(PORTB, PORTB1);
     } else if (c == '0') {
