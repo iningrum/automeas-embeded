@@ -23,15 +23,25 @@ int main(void) {
   while (!(UCSR0A & (1 << UDRE0)))
     ;
   while (1) {
-    char c = getChr();
-    if (c != '\0') {
-      *cmd = c;
+    char c = lpeekChr();
+    if (c == 'x') {
+      while (1)
+        sbi(PORTB, PORTB1);
+      char cmd = getChr();
+      *echoVal = cmd;
       serialWrite(echoBuffer);
-    }
-    if (c == '1') {
-      sbi(PORTB, PORTB1);
-    } else if (c == '0') {
-      cbi(PORTB, PORTB1);
+      uint8_t val;
+      { // get val
+        char dataBuffer[3];
+        for (uint8_t i = 0; i < 3; i++) {
+          dataBuffer[i] = getChr();
+        }
+        val = tc28b(dataBuffer);
+      }
+      if (val == 125 && cmd == 'c')
+        sbi(PORTB, PORTB1);
+      else
+        cbi(PORTB, PORTB1);
     }
   }
 }
