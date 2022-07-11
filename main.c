@@ -1,4 +1,4 @@
-// automeas-embeded-0-0-0 by Kczyz
+// by Kczyz
 /*
     Project :
         AUTOMEAS
@@ -6,11 +6,37 @@
         A simple program that establishes comms  between
         PC and MCU.
 */
-
+#include <avr/interrupt.h>
+#include <avr/io.h>
 #include "includes_definitions.h"
+#include "main.h"
 #include "rx.h"
 #include "tx.h"
+#include "smath.h"
+typedef struct {
+  char cmd;
+  uint8_t val;
+} Datum;
+Datum getDatum(void) {
+  Datum result;
+  result.cmd = getChr();
+  *echoVal = result.cmd; 
+  serialWrite(echoBuffer);
+  { // get val
+    char dataBuffer[3];
+    for (uint8_t i = 0; i < 3; i++) {
+      dataBuffer[i] = getChr();
+      *echoVal = dataBuffer[i];
+      serialWrite(echoBuffer);
+    }
+    serialWrite("\n\r");
+    result.val = tc28b(dataBuffer);
+    getChr();
+  }
+  return result;
+}
 int main(void) {
+  Datum T;
   UBRR0H = (BRC >> 8);
   UBRR0L = BRC;
   UCSR0B = (1 << TXEN0) | (1 << TXCIE0) | (1 << RXEN0) | (1 << RXCIE0);
@@ -23,29 +49,27 @@ int main(void) {
   while (!(UCSR0A & (1 << UDRE0)))
     ;
   while (1) {
-    char c = getChr();
-    if (c != '\0') {
-      *cmd = c;
-      serialWrite(echoBuffer);
-    }
-    if (c == '1') {
-      sbi(PORTB, PORTB1);
-    } else if (c == '0') {
-      cbi(PORTB, PORTB1);
+    char c = lpeekChr();
+    if (c == 'x') {
+      T = getDatum();
+      if (T.val == 125 && T.cmd == 'c')
+        sbi(PORTB, PORTB2);
+      else
+        cbi(PORTB, PORTB2);
     }
   }
 }
 ISR(USART_RX_vect) {
-  rxBuffer[rxWritePos++] = UDR0;
-  if (rxWritePos >= RX_BUFFER_SIZE) {
-    rxWritePos = 0;
+  rx.Buffer[rx.WritePos++] = UDR0;
+  if (rx.WritePos >= BUFFER_SIZE) {
+    rx.WritePos = 0;
   }
 }
 ISR(USART_TX_vect) {
-  if (txReadPos != txWritePos) {
-    UDR0 = txBuffer[txReadPos++];
-    if (txReadPos >= TX_BUFFER_SIZE) {
-      txReadPos++;
+  if (tx.ReadPos != tx.WritePos) {
+    UDR0 = tx.Buffer[tx.ReadPos++];
+    if (tx.ReadPos >= BUFFER_SIZE) {
+      tx.ReadPos++;
     }
   }
 }
