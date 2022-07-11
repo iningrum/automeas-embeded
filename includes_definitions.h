@@ -1,4 +1,4 @@
-// automeas-embeded-0.0.0 by Kczyz
+// by Kczyz
 /*
     Contains all includes and macros
     used all over the project.
@@ -14,9 +14,7 @@
 #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))  // sets i-th bit
 #define BAUD 9600                                   // baudrate
 #define BRC ((F_CPU / 16 / BAUD) - 1)               // ??
-#define RX_BUFFER_SIZE 128                          // receive buffer
-#define TX_BUFFER_SIZE 128
 // greeter definitions
-#define GREETER_LINE1 "automeas-embeded-0.0.0 by Kczyz\n\r"
+#define GREETER_LINE1 "automeas-embeded-0.1.0 by Kczyz\n\r"
 #define GREETER_LINE2 "-------------------------------\n\r"
 #endif

@@ -1,19 +1,16 @@
-// automeas-embeded-0.0.0 by Kczyz
+// by Kczyz
 /*
     Code responsible for transmiting data over USART
 */
 #ifndef TX_H
 #define TX_H
-#include "includes_definitions.h"
+#include <string.h>
 // variables
-char txBuffer[TX_BUFFER_SIZE];
-uint8_t txReadPos = 0;
-uint8_t txWritePos = 0;
 // functions
 void appendSerial(char c) {
-  txBuffer[txWritePos++] = c;
-  if (txWritePos >= TX_BUFFER_SIZE) {
-    txWritePos = 0;
+  tx.Buffer[tx.WritePos++] = c;
+  if (tx.WritePos >= BUFFER_SIZE) {
+    tx.WritePos = 0;
   }
 }
 void serialWrite(char c[]) {

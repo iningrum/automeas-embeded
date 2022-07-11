@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul 11 17:58:43 2022
+# Make data base, printed on Mon Jul 11 19:28:58 2022
 
 # Variables
 
@@ -121,7 +121,7 @@ _ = /mnt/c/Users/Admin/AppData/Local/Programs/Microsoft VS Code/bin/code
 # makefile (from 'Makefile', line 3)
 CFLAGS = -Os -DF_APU=16000000UL $(LDFLAGS)
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-839fb13c-200f-4bc6-89cc-b8da17eaf1f3.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-0a140f66-6c54-4122-9d43-fdc86bce9980.sock
 # makefile (from 'Makefile', line 1)
 C = avr-gcc
 # environment
@@ -143,7 +143,7 @@ WSL_DISTRO_NAME = Debian
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
 # variable set hash-table stats:
-# Load=66/1024=6%, Rehash=0, Collisions=1/104=1%
+# Load=66/1024=6%, Rehash=0, Collisions=1/99=1%
 
 # Pattern-specific Variable Values
 
@@ -151,9 +151,9 @@ WSL_DISTRO_NAME = Debian
 
 # Directories
 
-# . (device 2064, inode 54826): 17 files, no impossibilities.
+# . (device 2064, inode 54826): 18 files, no impossibilities.
 
-# 17 files, no impossibilities in 1 directories.
+# 18 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -170,35 +170,16 @@ deploy: comm.hex
 
 comm.o: main.c
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  Last modified 2022-07-10 21:45:19.0340851
+#  Last modified 2022-07-11 19:28:22.8362397
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := comm.o
-# automatic
-# * := 
-# automatic
-# < := main.c
-# automatic
-# + := main.c
-# automatic
-# % := 
-# automatic
-# ^ := main.c
-# automatic
-# ? := main.c
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 13):
 	avr-gcc $(CFLAGS) -c -o $@ $<
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-10 12:34:06.5932058
+#  Last modified 2022-07-11 19:08:10.4462397
 #  File has been updated.
 #  Successfully updated.
 
@@ -222,57 +203,45 @@ all: comm.hex
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Successfully updated.
 
 # Not a target:
 main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-11 17:50:56.1162397
+#  Last modified 2022-07-11 19:15:00.4362397
 #  File has been updated.
 #  Successfully updated.
 
 comm: comm.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-10 21:45:19.0440851
+#  Last modified 2022-07-11 19:28:22.9762397
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 11):
 	avr-gcc $(LDFLAGS) -o  $@ $^
 
 comm.hex: comm
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-10 21:45:19.0440851
+#  Last modified 2022-07-11 19:28:22.9762397
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 9):
 	avr-objcopy -O ihex -R .eeprom comm comm.hex
 
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 # files hash-table stats:
-# Load=10/1024=1%, Rehash=0, Collisions=0/30=0%
+# Load=10/1024=1%, Rehash=0, Collisions=0/29=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 24 / storage = 207 B / avg = 8 B
-# current buf: size = 8162 B / used = 207 B / count = 24 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 25 / storage = 214 B / avg = 8 B
+# current buf: size = 8162 B / used = 214 B / count = 25 / avg = 8 B
 
-# strcache performance: lookups = 44 / hit rate = 45%
+# strcache performance: lookups = 44 / hit rate = 43%
 # hash-table stats:
-# Load=24/8192=0%, Rehash=0, Collisions=0/44=0%
-# Finished Make data base on Mon Jul 11 17:58:43 2022
+# Load=25/8192=0%, Rehash=0, Collisions=0/44=0%
+# Finished Make data base on Mon Jul 11 19:28:58 2022
 
  

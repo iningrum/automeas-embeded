@@ -1,4 +1,4 @@
-// automeas-embeded-0-0-0 by Kczyz
+// by Kczyz
 /*
     Project :
         AUTOMEAS
@@ -9,8 +9,10 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include "includes_definitions.h"
+#include "main.h"
 #include "rx.h"
 #include "tx.h"
+#include "smath.h"
 typedef struct {
   char cmd;
   uint8_t val;
@@ -58,16 +60,16 @@ int main(void) {
   }
 }
 ISR(USART_RX_vect) {
-  rxBuffer[rxWritePos++] = UDR0;
-  if (rxWritePos >= RX_BUFFER_SIZE) {
-    rxWritePos = 0;
+  rx.Buffer[rx.WritePos++] = UDR0;
+  if (rx.WritePos >= BUFFER_SIZE) {
+    rx.WritePos = 0;
   }
 }
 ISR(USART_TX_vect) {
-  if (txReadPos != txWritePos) {
-    UDR0 = txBuffer[txReadPos++];
-    if (txReadPos >= TX_BUFFER_SIZE) {
-      txReadPos++;
+  if (tx.ReadPos != tx.WritePos) {
+    UDR0 = tx.Buffer[tx.ReadPos++];
+    if (tx.ReadPos >= BUFFER_SIZE) {
+      tx.ReadPos++;
     }
   }
 }
