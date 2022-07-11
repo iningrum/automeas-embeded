@@ -6,7 +6,8 @@
         A simple program that establishes comms  between
         PC and MCU.
 */
-
+#include <avr/interrupt.h>
+#include <avr/io.h>
 #include "includes_definitions.h"
 #include "rx.h"
 #include "tx.h"
@@ -17,7 +18,7 @@ typedef struct {
 Datum getDatum(void) {
   Datum result;
   result.cmd = getChr();
-  *echoVal = result.cmd;
+  *echoVal = result.cmd; 
   serialWrite(echoBuffer);
   { // get val
     char dataBuffer[3];
