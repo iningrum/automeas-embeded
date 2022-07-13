@@ -1,6 +1,6 @@
 C = avr-gcc
 LDFLAGS ?= -mmcu=atmega328p 
-CFLAGS ?= -Os -DF_APU=16000000UL $(LDFLAGS)
+CFLAGS ?= -Os -DF_APU=16000000UL --short-enums $(LDFLAGS)
 PORT ?= /dev/ttyUSB0
 
 
