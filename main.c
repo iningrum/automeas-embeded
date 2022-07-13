@@ -6,6 +6,8 @@
         A simple program that establishes comms  between
         PC and MCU.
 */
+#define RDEL 300
+#define LDEL 300
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include "includes_definitions.h"
@@ -17,6 +19,11 @@ typedef struct {
   char cmd;
   uint8_t val;
 } Datum;
+void clearAllMs(){
+  cbi(PORTB, PB4);
+  cbi(PORTB, PB3);
+  cbi(PORTB, PB2);
+}
 Datum getDatum(void) {
   Datum result;
   result.cmd = getChr();
@@ -52,10 +59,64 @@ int main(void) {
     char c = lpeekChr();
     if (c == 'x') {
       T = getDatum();
-      if (T.val == 125 && T.cmd == 'c')
-        sbi(PORTB, PORTB2);
-      else
-        cbi(PORTB, PORTB2);
+      switch(T.cmd){
+        case 'f':
+          clearAllMs();
+          sbi(PORTB, PB2);
+          break;
+        case 'h':
+          if(T.val==0){
+            // kolowe pul kroku a
+            clearAllMs();
+            sbi(PORTB, PB3);
+          } else {
+            // kolowe pol kroku b
+            clearAllMs();
+            sbi(PORTB, PB4);
+          }
+          break;
+        case '4':
+          cbi(PORTB, PB4);
+          sbi(PORTB, PB3);
+          sbi(PORTB, PB2);
+          break;
+        case '8':
+          sbi(PORTB, PB4);
+          cbi(PORTB, PB3);
+          sbi(PORTB, PB2);
+          break;
+        case '6':
+          sbi(PORTB, PB4);
+          sbi(PORTB, PB3);
+          cbi(PORTB, PB2);
+          break;
+        case '3':
+          sbi(PORTB, PB4);
+          sbi(PORTB, PB3);
+          sbi(PORTB, PB2);
+          break;
+        case 'l':
+          cbi(PORTB, PB1);
+          for (uint8_t i = 0; i <= T.val; i++){
+            sbi(PORTB, PB0);
+            _delay_ms(LDEL);
+            cbi(PORTB, PB0);
+            _delay_ms(RDEL);
+          }
+            break;
+        case 'r':
+          sbi(PORTB, PB1);
+          for (uint8_t i = 0; i <= T.val; i++){
+            sbi(PORTB, PB0);
+            _delay_ms(LDEL);
+            cbi(PORTB, PB0);
+            _delay_ms(RDEL);
+          }
+          break;
+        case 'p':
+          clearAllMs();
+          break;
+        }
     }
   }
 }
