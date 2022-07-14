@@ -6,14 +6,14 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul 13 19:02:08 2022
+# Make data base, printed on Thu Jul 14 14:42:24 2022
 
 # Variables
 
 # environment
 LC_ALL = C
 # environment
-WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION::WT_PROFILE_ID
+WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
 # environment
 VSCODE_CWD = /mnt/c/Users/Admin/AppData/Local/Programs/Microsoft VS Code
 # default
@@ -45,7 +45,7 @@ MAKEFLAGS = pqrR
 # makefile
 CURDIR := /home/iningrum/projects/automeas-embeded
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # makefile (from 'Makefile', line 4)
@@ -62,8 +62,6 @@ MAKEFILE_LIST := Makefile
 @F = $(notdir $@)
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# environment
-WT_PROFILE_ID = {58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}
 # automatic
 *F = $(notdir $*)
 # automatic
@@ -77,23 +75,23 @@ SHELL = /bin/sh
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 0
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/iningrum/.vscode-server/bin/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9/bin/remote-cli:/home/iningrum/.local/bin:/home/iningrum/scripts/usr_scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ispLEVER_Classic2_1/ispcpld/bin:/mnt/c/ispLEVER_Classic2_1/ispFPGA/bin/nt:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Intel/iCLS Client/:/mnt/c/Program Files/Intel/iCLS Client/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files (x86)/Yarn/bin/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/usbipd-win/:/mnt/c/Users/Admin/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Admin/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/Admin/.dotnet/tools:/mnt/c/Users/Admin/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2021.3.3/bin:/mnt/c/Users/Admin/AppData/Local/Yarn/bin:/mnt/c/Users/Admin/AppData/Roaming/npm:/mnt/c/Program Files/JetBrains/PyCharm 2022.1.3/bin
+PATH = /home/iningrum/.vscode-server/bin/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a/bin/remote-cli:/home/iningrum/.local/bin:/home/iningrum/scripts/usr_scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ispLEVER_Classic2_1/ispcpld/bin:/mnt/c/ispLEVER_Classic2_1/ispFPGA/bin/nt:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Intel/iCLS Client/:/mnt/c/Program Files/Intel/iCLS Client/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files (x86)/Yarn/bin/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/usbipd-win/:/mnt/c/Users/Admin/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Admin/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/Admin/.dotnet/tools:/mnt/c/Users/Admin/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2021.3.3/bin:/mnt/c/Users/Admin/AppData/Local/Yarn/bin:/mnt/c/Users/Admin/AppData/Roaming/npm:/mnt/c/Program Files/JetBrains/PyCharm 2022.1.3/bin
 # default
 MAKEFILES := 
 # automatic
 ^F = $(notdir $^)
-# environment
-WT_SESSION = 6582fdae-b147-434c-8984-2931486d0d54
 # automatic
 ?F = $(notdir $?)
 # environment
-NAME = Code
+NAME = LAPTOP-0AT4FT3C
+# environment
+VSCODE_SERVER_TAR = /mnt/c/Users/Admin/AppData/Local/Temp/vscode-remote-wsl/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a/vscode-server-stable-linux-x64.tar.gz
 # environment
 HOSTTYPE = x86_64
 # environment
@@ -101,7 +99,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # automatic
 +F = $(notdir $+)
 # environment
-WSL_INTEROP = /run/WSL/2773_interop
+WSL_INTEROP = /run/WSL/94_interop
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
@@ -117,11 +115,11 @@ MAKE_VERSION := 4.3
 # makefile (from 'Makefile', line 2)
 LDFLAGS = -mmcu=atmega328p 
 # environment
-_ = /mnt/c/Users/Admin/AppData/Local/Programs/Microsoft VS Code/bin/code
+_ = /home/iningrum/.vscode-server/bin/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a/node
 # makefile (from 'Makefile', line 3)
 CFLAGS = -Os -DF_APU=16000000UL --short-enums $(LDFLAGS)
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-ec8ccc3b-ef66-4b79-bc92-28f656423aa3.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-d426855c-f6bb-465e-9063-97b393ca3e29.sock
 # makefile (from 'Makefile', line 1)
 C = avr-gcc
 # environment
@@ -143,7 +141,7 @@ WSL_DISTRO_NAME = Debian
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
 # variable set hash-table stats:
-# Load=66/1024=6%, Rehash=0, Collisions=1/99=1%
+# Load=65/1024=6%, Rehash=0, Collisions=1/103=1%
 
 # Pattern-specific Variable Values
 
@@ -170,9 +168,28 @@ deploy: comm.hex
 
 comm.o: main.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-11 20:27:03.3462397
+#  Implicit/static pattern stem: ''
+#  Last modified 2022-07-13 20:30:49.1113793
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := comm.o
+# automatic
+# * := 
+# automatic
+# < := main.c
+# automatic
+# + := main.c
+# automatic
+# % := 
+# automatic
+# ^ := main.c
+# automatic
+# ? := main.c
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
 #  recipe to execute (from 'Makefile', line 13):
 	avr-gcc $(CFLAGS) -c -o $@ $<
 
@@ -203,33 +220,45 @@ all: comm.hex
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 
 # Not a target:
 main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-11 19:43:28.9962397
+#  Last modified 2022-07-13 20:34:16.8413793
 #  File has been updated.
 #  Successfully updated.
 
 comm: comm.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-11 20:27:03.5162397
+#  Last modified 2022-07-13 20:30:49.1213793
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 #  recipe to execute (from 'Makefile', line 11):
 	avr-gcc $(LDFLAGS) -o  $@ $^
 
 comm.hex: comm
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-11 20:27:03.5162397
+#  Last modified 2022-07-13 20:30:49.1213793
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 #  recipe to execute (from 'Makefile', line 9):
 	avr-objcopy -O ihex -R .eeprom comm comm.hex
 
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=10/1024=1%, Rehash=0, Collisions=0/29=0%
+# Load=10/1024=1%, Rehash=0, Collisions=0/30=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -239,9 +268,9 @@ comm.hex: comm
 # strcache buffers: 1 (0) / strings = 27 / storage = 233 B / avg = 8 B
 # current buf: size = 8162 B / used = 233 B / count = 27 / avg = 8 B
 
-# strcache performance: lookups = 46 / hit rate = 41%
+# strcache performance: lookups = 47 / hit rate = 42%
 # hash-table stats:
-# Load=27/8192=0%, Rehash=0, Collisions=0/46=0%
-# Finished Make data base on Wed Jul 13 19:02:08 2022
+# Load=27/8192=0%, Rehash=0, Collisions=0/47=0%
+# Finished Make data base on Thu Jul 14 14:42:24 2022
 
  
