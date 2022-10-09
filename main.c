@@ -6,8 +6,8 @@
         A simple program that establishes comms  between
         PC and MCU.
 */
-#define RDEL 300
-#define LDEL 300
+#define RDEL 1000 // minimal stable delay is 1000 us
+#define LDEL 1000 // 600 us is achievable though inconsistent
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include "includes_definitions.h"
@@ -24,6 +24,17 @@ void clearAllMs(){
   cbi(PORTB, PB3);
   cbi(PORTB, PB2);
 }
+void reset(Datum *T) { 
+  T->cmd = "";
+  T->val = 0;
+  clearAllMs();
+  *echoVal = &echoBuffer[0]; // this is just stupid
+  rx.ReadPos = 0;
+  rx.WritePos = 0;
+  tx.ReadPos = 0;
+  tx.WritePos = 0;
+  UDR0 = "";
+}
 Datum getDatum(void) {
   Datum result;
   result.cmd = getChr();
@@ -36,7 +47,7 @@ Datum getDatum(void) {
       *echoVal = dataBuffer[i];
       serialWrite(echoBuffer);
     }
-    serialWrite("\n\r");
+    serialWrite("\n");
     result.val = tc28b(dataBuffer);
     getChr();
   }
@@ -48,7 +59,7 @@ int main(void) {
   UBRR0L = BRC;
   UCSR0B = (1 << TXEN0) | (1 << TXCIE0) | (1 << RXEN0) | (1 << RXCIE0);
   UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
-  DDRB = (1 << PORTB1);
+  DDRB = (1 << PB0) | (1 << PB1) | (1 << PB2) | (1 << PB3) | (1 << PB4);
   sei();
   serialWrite(GREETER_LINE2);
   serialWrite(GREETER_LINE1);
@@ -99,26 +110,41 @@ int main(void) {
           cbi(PORTB, PB1);
           for (uint8_t i = 0; i <= T.val; i++){
             sbi(PORTB, PB0);
-            _delay_ms(LDEL);
+            _delay_us(LDEL);
             cbi(PORTB, PB0);
-            _delay_ms(RDEL);
+            _delay_us(RDEL);
           }
-            break;
+          serialWrite("done");
+          serialWrite("\n");
+          break;
         case 'r':
           sbi(PORTB, PB1);
           for (uint8_t i = 0; i <= T.val; i++){
             sbi(PORTB, PB0);
-            _delay_ms(LDEL);
+            _delay_us(LDEL);
             cbi(PORTB, PB0);
-            _delay_ms(RDEL);
+            _delay_us(RDEL);
           }
+          serialWrite("done");
+          serialWrite("\n");
           break;
         case 'p':
           clearAllMs();
           break;
+        case 'z':
+          reset(&T);
         }
     }
   }
+  /*DDRB = (1 << PB0) | (1 << PB1) | (1 << PB2) | (1 << PB3) | (1 << PB4);
+  cbi(PORTB, PB4);
+  sbi(PORTB, PB3);
+  sbi(PORTB, PB2);
+  for (uint8_t i = 0; i < 10; i++){
+            sbi(PORTB, PB0);
+            _delay_ms(LDEL);
+            cbi(PORTB, PB0);
+            _delay_ms(RDEL);}*/
 }
 ISR(USART_RX_vect) {
   rx.Buffer[rx.WritePos++] = UDR0;
